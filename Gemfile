@@ -35,6 +35,10 @@ gem 'bootstrap-sass', '~> 3.3.6'
 
 gem 'bootstrap3_form_builder'
 
+# Use devise for authentication, pundit for authorization
+gem 'devise'
+gem 'pundit'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri

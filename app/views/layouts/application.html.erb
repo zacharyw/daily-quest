@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>DailQuest</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DailyQuest</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +10,12 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="container">
+      <div class="row">
+        <p class="bg-info"><%= notice %></p>
+        <p class="bg-danger"><%= alert %></p>
+        <%= yield %>
+      </div>
+    </div>
   </body>
 </html>

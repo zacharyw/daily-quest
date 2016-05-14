@@ -33,7 +33,7 @@ gem 'jbuilder', '~> 2.0'
 # Use Bootstrap CSS framework
 gem 'bootstrap-sass', '~> 3.3.6'
 
-gem 'bootstrap3_form_builder'
+gem 'bootstrap3_form_builder', '1.0.1'
 
 # Use devise for authentication, pundit for authorization
 gem 'devise'

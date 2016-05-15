@@ -5,4 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :quests
+
+  def active_quests
+    self.quests.where(complete: false)
+  end
 end

@@ -1,0 +1,8 @@
+<div class="row">
+  <%= bootstrap_form_for @quest, url: { action: action } do |f| %>
+      <%= f.text_field :description, help_block: 'A quest must have a purpose.' %>
+      <%= f.text_field :reward, help_block: 'Optional. What treasure or leisure awaits you at the end?' %>
+      <%= f.text_field :goal, help_block: 'Optional, unless you specify a reward. How many days must you complete this quest for the reward?' %>
+      <%= f.submit "Sail to Glory", class: "btn btn-primary" %>
+  <% end %>
+</div>

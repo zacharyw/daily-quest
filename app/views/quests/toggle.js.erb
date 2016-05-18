@@ -1,0 +1,3 @@
+var $chain_cell = $("#<%= @quest.id %>_chain");
+var addend = <%= @completed ? 1 : -1 %>;
+$chain_cell.text(parseInt($chain_cell.text()) + addend);

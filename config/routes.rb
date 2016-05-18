@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :quests
+  post 'toggle', to: 'quests#toggle'
 
   root to: "quests#index"
 

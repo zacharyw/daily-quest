@@ -1,28 +1,54 @@
 <div class="row">
-  <h1>Daily Quests</h1>
+  <h1>
+    <span style="color: blue; font-weight: bold; font-family: fantasy;">!</span>Daily Quests
+  </h1>
+</div>
+
+<div class="row">
+  <p>
+    Daily quests are to-do lists for your life. They are activities that you want to become routine.
+    They should contribute to your life goals and long term happiness.
+    Build your quest log here, and check it every day to remind yourself of what you should be doing.
+    Tick off quests as you complete them each day. Completing quests on consecutive days will build an ever higher
+    chain score.
+  </p>
 </div>
 
 <div class="row">
   <%= link_to 'Embark on a New Quest!', new_quest_path, class: 'btn btn-success' %>
 </div>
 
-<div class="row">
-  <table class="table">
-    <thead>
-      <th>Description</th>
-      <th>Goal</th>
-      <th>Reward</th>
-      <th>Current Chain</th>
-    </thead>
-    <tbody>
-    <tr>
-      <% @quests.each do |quest| %>
-          <td><%= link_to quest.description, edit_quest_path(quest.id) %></td>
-          <td><%= quest.goal %></td>
-          <td><%= quest.reward %></td>
-          <td><%= quest.chain %></td>
-      <% end %>
-    </tr>
-    </tbody>
-  </table>
-</div>
+<% unless @quests.empty? %>
+  <div class="row">
+    <table class="table">
+      <thead>
+        <th>Description</th>
+        <th>Goal</th>
+        <th>Reward</th>
+        <th>Current Chain</th>
+        <th>Complete Today</th>
+      </thead>
+      <tbody>
+      <tr>
+        <% @quests.each do |quest| %>
+            <td>
+              <%= link_to quest.description, edit_quest_path(quest.id) %>
+            </td>
+            <td><%= quest.goal %></td>
+            <td><%= quest.reward %></td>
+            <td id="<%= quest.id %>_chain"><%= quest.chain %></td>
+            <td>
+              <%= check_box_tag 'complete', quest.id, quest.complete_today?,
+                                data: {
+                                    remote: true,
+                                    url: url_for(action: :toggle, id: quest.id),
+                                    method: 'POST'
+                                }
+              %>
+            </td>
+        <% end %>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+<% end %>

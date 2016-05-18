@@ -21,7 +21,7 @@ class Quest < ApplicationRecord
       # Latest completion
       if prev_date.nil?
         chain = chain + 1
-        prev_date = completion.created_at.to_date
+        prev_date = completion.date_completed
 
         next
       end
@@ -37,5 +37,22 @@ class Quest < ApplicationRecord
     end
 
     chain
+  end
+
+  def toggle_completion
+    today = Date.today
+    completion = self.completions(date_completed: today).first
+
+    if completion.nil?
+      self.completions.create(date_completed: today)
+      true
+    else
+      completion.destroy
+      false
+    end
+  end
+
+  def complete_today?
+    self.completions(date_completed: Date.today).present?
   end
 end

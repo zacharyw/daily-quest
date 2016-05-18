@@ -41,6 +41,17 @@ class QuestsController < ApplicationController
     redirect_to quests_path
   end
 
+  def toggle
+    @quest = Quest.find(params[:id])
+
+    @completed = @quest.toggle_completion
+
+    respond_to do |format|
+      format.html { redirect_to quests_path, notice: "Quest completed!" }
+      format.js
+    end
+  end
+
   private
     def quest_params
       params.require(:quest).permit(:description, :goal, :reward)

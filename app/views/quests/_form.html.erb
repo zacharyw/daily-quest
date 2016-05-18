@@ -4,5 +4,8 @@
       <%= f.text_field :reward, help_block: 'Optional. What treasure or leisure awaits you at the end?' %>
       <%= f.text_field :goal, help_block: 'Optional, unless you specify a reward. How many days must you complete this quest for the reward?' %>
       <%= f.submit "Sail to Glory", class: "btn btn-primary" %>
+      <% if action == 'update' %>
+        <%= link_to 'Destroy', quest_path(@quest), method: :delete, data: {confirm: 'Are you sure you wish to disembark this quest, forever?'}, class: "btn btn-danger" %>
+      <% end %>
   <% end %>
 </div>

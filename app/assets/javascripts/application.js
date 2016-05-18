@@ -1,4 +1,4 @@
-###
+/*
 This is a manifest file that'll be compiled into application.js, which will include all the files
 listed below.
 
@@ -10,9 +10,9 @@ compiled file. JavaScript code in this file should be added after the last requi
 
 Read Sprockets README (https:github.com/rails/sprockets#sprockets-directives) for details
 about supported directives.
-###
+*/
 
-#= require jquery
-#= require jquery_ujs
-#= require turbolinks
-#= require_tree .
+//= require jquery
+//= require jquery_ujs
+//= require turbolinks
+//= require_tree .

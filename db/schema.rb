@@ -11,12 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160515123439) do
+ActiveRecord::Schema.define(version: 20160518013413) do
 
   create_table "completions", force: :cascade do |t|
     t.integer  "quest_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.date     "date_completed"
     t.index ["quest_id"], name: "index_completions_on_quest_id"
   end
 

@@ -4,4 +4,15 @@
 <div class="row">
   <%= render partial: "form", locals: { action: "update" } %>
 </div>
+<div class="row">
+  <h2>Completion Calendar</h2>
+</div>
+<div class="row">
+  <%= month_calendar events: @quest.completions, attribute: :date_completed do |date, completions| %>
+    <%= date.day %>
+    <% completions.each do %>
+      <div class="full-circle"></div>
+    <% end %>
+  <% end %>
+</div>
 

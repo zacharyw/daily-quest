@@ -39,6 +39,8 @@ gem 'bootstrap3_form_builder', '1.0.1'
 gem 'devise'
 gem 'pundit'
 
+gem 'simple_calendar'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri

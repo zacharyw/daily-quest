@@ -45,6 +45,7 @@ class QuestsController < ApplicationController
     @quest = Quest.find(params[:id])
 
     @completed = @quest.toggle_completion
+    @quest.reload
 
     respond_to do |format|
       format.html { redirect_to quests_path, notice: "Quest completed!" }

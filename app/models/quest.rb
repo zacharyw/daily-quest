@@ -9,10 +9,10 @@ class Quest < ApplicationRecord
 
   default :complete, false
 
-  def chain
+  def chain(from_date: Date.today)
     prev_date = nil
     chain = 0
-    self.completions.order(created_at: :desc).find_each(batch_size: 30) do |completion|
+    self.completions.where("date_completed <= :from_date", {from_date: from_date}).order(created_at: :desc).find_each(batch_size: 30) do |completion|
       # If this quest hasn't been completed in the last 24 hours, consider the chain broken
       if completion.created_at < 24.hours.ago
         break
@@ -39,6 +39,25 @@ class Quest < ApplicationRecord
     chain
   end
 
+  #Look back through completions to determine the longest chain.
+  def longest_chain
+    max_length = 0
+    prev_date = nil
+
+    self.completions.order(created_at: :desc).each do |completion|
+      # Skip completions that are part of the same chain.
+      if prev_date.nil? || prev_date.yesterday != completion.date_completed
+        chain_length = self.chain(from_date: completion.date_completed)
+
+        max_length = chain_length if chain_length > max_length
+      end
+
+      prev_date = completion.date_completed
+    end
+
+    max_length
+  end
+
   def toggle_completion
     today = Date.today
     completion = self.completions(date_completed: today).first
@@ -53,6 +72,6 @@ class Quest < ApplicationRecord
   end
 
   def complete_today?
-    self.completions(date_completed: Date.today).present?
+    self.completions.where(date_completed: Date.today).present?
   end
 end

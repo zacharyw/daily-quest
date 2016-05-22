@@ -1,3 +1,7 @@
 var $chain_cell = $("#<%= @quest.id %>_chain");
-var addend = <%= @completed ? 1 : -1 %>;
-$chain_cell.text(parseInt($chain_cell.text()) + addend);
+var $completion_cell = $("#<%= @quest.id %>_completions");
+var $longest_cell = $("#<%= @quest.id %>_longest");
+
+$chain_cell.text(<%= @quest.chain %>);
+$completion_cell.text(<%= @quest.completions.size %>);
+$longest_cell.text(<%= @quest.longest_chain %>);

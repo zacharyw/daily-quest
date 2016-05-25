@@ -33,7 +33,7 @@ gem 'jbuilder', '~> 2.0'
 # Use Bootstrap CSS framework
 gem 'bootstrap-sass', '~> 3.3.6'
 
-gem 'bootstrap3_form_builder', '1.0.1'
+gem 'bootstrap3_form_builder', '1.0.5'
 
 # Use devise for authentication, pundit for authorization
 gem 'devise'
@@ -42,8 +42,9 @@ gem 'pundit'
 gem 'simple_calendar'
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platform: :mri
+  # Call 'binding.pry' anywhere in the code to stop execution and get a debugger console
+  gem 'pry'
+  gem 'pry-byebug'
   gem 'rspec-rails', '~> 3.5.0.beta3'
   gem 'factory_girl_rails'
 end

@@ -1,6 +1,6 @@
 class QuestsController < ApplicationController
   def index
-    @quests = current_user.active_quests
+    @quests = policy_scope(Quest)
   end
 
   def new
@@ -9,6 +9,7 @@ class QuestsController < ApplicationController
 
   def create
     @quest = Quest.new(quest_params)
+    @quest.authorize
     @quest.user = current_user
 
     if @quest.save
@@ -18,10 +19,11 @@ class QuestsController < ApplicationController
 
   def edit
     @quest = Quest.find(params[:id])
+    authorize @quest
   end
 
   def update
-    @quest = Quest.find(params[:id])
+    @quest = authorize Quest.find(params[:id])
 
     if @quest.update(quest_params)
       redirect_to @quest
@@ -32,10 +34,12 @@ class QuestsController < ApplicationController
 
   def show
     @quest = Quest.find(params[:id])
+    authorize @quest
   end
 
   def destroy
     @quest = Quest.find(params[:id])
+    authorize @quest
     @quest.destroy
 
     redirect_to quests_path
@@ -43,6 +47,7 @@ class QuestsController < ApplicationController
 
   def toggle
     @quest = Quest.find(params[:id])
+    @quest.authorize
 
     @completed = @quest.toggle_completion
     @quest.reload

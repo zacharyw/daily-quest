@@ -5,8 +5,7 @@ class Quest < ApplicationRecord
 
   validates_presence_of :user, :description
   validates :goal, numericality: { only_integer: true }
-  validates :reward, presence: true, if: "!goal.blank?"
-  #validate :goal_and_reward
+  validates :reward, presence: true, if: "goal.present?"
 
   default :complete, false
 
@@ -74,11 +73,5 @@ class Quest < ApplicationRecord
 
   def complete_today?
     self.completions.where(date_completed: Date.today).present?
-  end
-
-  def goal_and_reward
-    if (goal.blank? && !reward.blank?) || (reward.blank? && !goal.blank?)
-      errors.add(:reward, 'and goal must be specified together.')
-    end
   end
 end

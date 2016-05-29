@@ -21,4 +21,4 @@
 .byebug_history
 
 *.iml
-.idea/*
+.idea/

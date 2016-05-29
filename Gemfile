@@ -37,7 +37,7 @@ gem 'bootstrap3_form_builder', '1.0.5'
 
 # Use devise for authentication, pundit for authorization
 gem 'devise'
-gem 'pundit'
+gem 'pundit', git: "https://github.com/elabs/pundit.git", ref: "58eda65"
 
 gem 'simple_calendar'
 

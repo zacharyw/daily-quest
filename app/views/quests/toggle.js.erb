@@ -5,3 +5,14 @@ var $longest_cell = $("#<%= @quest.id %>_longest");
 $chain_cell.text(<%= @quest.chain %>);
 $completion_cell.text(<%= @quest.completions.size %>);
 $longest_cell.text(<%= @quest.longest_chain %>);
+
+var completions = <%=@quest.completions.size %>;
+var completion_mod = completions % <%= @quest.goal %>;
+
+if( completions != 0 && completion_mod == 0 ) {
+  $("#rewardModalText").text("<%= @quest.reward %>");
+  $("#goalModalText").text(<%= @quest.goal %>);
+  $(".modal-footer").html('<%= link_to "Update Reward", edit_quest_path(@quest), class: "btn btn-primary" %>');
+  $(".modal-footer").append('<%= link_to 'End Quest', quest_path(@quest), method: :delete, data: {confirm: 'Are you sure you wish to disembark this quest, forever?'}, class: "btn btn-danger" %>');
+  $("#rewardModal").modal('show');
+}

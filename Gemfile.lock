@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/elabs/pundit.git
+  revision: 58eda659d44a2e9d5e022fd23cc0f65bad7f7d82
+  ref: 58eda65
+  specs:
+    pundit (1.1.0)
+      activesupport (>= 3.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -106,8 +114,6 @@ GEM
       mini_portile2 (~> 2.0.0.rc2)
     orm_adapter (0.5.0)
     puma (3.4.0)
-    pundit (1.1.0)
-      activesupport (>= 3.0.0)
     rack (2.0.0.rc1)
       json
     rack-test (0.6.3)
@@ -222,7 +228,7 @@ DEPENDENCIES
   jquery-rails
   listen (~> 3.0.5)
   puma (~> 3.0)
-  pundit
+  pundit!
   rails (>= 5.0.0.rc1, < 5.1)
   rspec-rails (~> 3.5.0.beta3)
   ruby-debug-ide

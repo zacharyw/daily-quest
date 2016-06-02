@@ -9,12 +9,12 @@ class Quest < ApplicationRecord
 
   default :complete, false
 
-  def chain(from_date: Date.today)
+  def chain(from_date: DateTime.now)
     prev_date = nil
     chain = 0
-    self.completions.where("date_completed <= :from_date", {from_date: from_date}).order(created_at: :desc).find_each(batch_size: 30) do |completion|
+    self.completions.where("created_at <= :from_date", {from_date: from_date}).order(created_at: :desc).each_with_index do |completion, index|
       # If this quest hasn't been completed in the last 24 hours, consider the chain broken
-      if completion.created_at < 24.hours.ago
+      if completion.created_at < from_date - 24.hours && index == 0
         break
       end
 
@@ -26,8 +26,8 @@ class Quest < ApplicationRecord
         next
       end
 
-      # Look back through completions until
-      completion_date = completion.to_date
+      # Look back through completions until we find a gap
+      completion_date = completion.date_completed
       if prev_date.yesterday == completion_date
         chain = chain + 1
         prev_date = completion_date
@@ -47,7 +47,7 @@ class Quest < ApplicationRecord
     self.completions.order(created_at: :desc).each do |completion|
       # Skip completions that are part of the same chain.
       if prev_date.nil? || prev_date.yesterday != completion.date_completed
-        chain_length = self.chain(from_date: completion.date_completed)
+        chain_length = self.chain(from_date: completion.created_at)
 
         max_length = chain_length if chain_length > max_length
       end
@@ -60,15 +60,18 @@ class Quest < ApplicationRecord
 
   def toggle_completion
     today = Date.today
-    completion = self.completions(date_completed: today).first
+    completion = self.completions.where(date_completed: today).first
 
+    result = true
     if completion.nil?
       self.completions.create(date_completed: today)
-      true
     else
       completion.destroy
-      false
+      result = false
     end
+
+    self.reload
+    result
   end
 
   def complete_today?

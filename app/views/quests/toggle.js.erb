@@ -7,10 +7,11 @@ $completion_cell.text(<%= @quest.completions.size %>);
 $longest_cell.text(<%= @quest.longest_chain %>);
 
 var completions = <%=@quest.completions.size %>;
-var goal_met = completions % <%= @quest.goal %>;
+var goal_met = completions % <%= @quest.goal %> === 0;
 var goal_present = <%= @quest.goal.present? %>;
+var complete_today = <%= @quest.complete_today? %>;
 
-if( completions != 0 && goal_met == 0 && goal_present) {
+if( complete_today && completions != 0 && goal_met && goal_present) {
   $("#rewardModalText").text("<%= @quest.reward %>");
   $("#goalModalText").text(<%= @quest.goal %>);
   $(".modal-footer").html('<%= link_to "Update Reward", edit_quest_path(@quest), class: "btn btn-primary" %>');

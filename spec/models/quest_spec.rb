@@ -96,6 +96,19 @@ RSpec.describe Quest, type: :model do
 
       it { is_expected.to eq longest.size }
     end
+
+    context 'current chain is longest' do
+      let(:longest) { (0..10) }
+
+      before do
+        longest.each do |n|
+          date = n.days.ago
+          create(:completion, quest: quest, created_at: date, date_completed: date)
+        end
+
+        it { is_expected.to eq longest.size }
+      end
+    end
   end
 
   describe '#toggle_completions' do

@@ -4,8 +4,8 @@ class Quest < ApplicationRecord
   has_many :completions
 
   validates_presence_of :user, :description
-  validates :goal, numericality: { only_integer: true }, if: "goal.present?"
-  validates :reward, presence: true, if: "goal.present?"
+  validates :goal, numericality: { only_integer: true }, allow_nil: true
+  validates :goal, presence: true, if: "reward.present?"
 
   default :complete, false
 
@@ -70,7 +70,6 @@ class Quest < ApplicationRecord
       result = false
     end
 
-    self.reload
     result
   end
 

@@ -3,11 +3,11 @@ var $completion_cell = $("#<%= @quest.id %>_completions");
 var $longest_cell = $("#<%= @quest.id %>_longest");
 
 $chain_cell.text(<%= @quest.chain %>);
-$completion_cell.text(<%= @quest.completions.size %>);
+$completion_cell.text(<%= @quest.completions.count %>);
 $longest_cell.text(<%= @quest.longest_chain %>);
 
 var completions = <%=@quest.completions.size %>;
-var goal_met = completions % <%= @quest.goal %> === 0;
+var goal_met = completions % <%= @quest.goal.present? ? @quest.goal : 0 %> === 0;
 var goal_present = <%= @quest.goal.present? %>;
 var complete_today = <%= @quest.complete_today? %>;
 

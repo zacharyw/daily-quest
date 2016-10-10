@@ -16,6 +16,8 @@ class QuestsController < ApplicationController
 
     if @quest.save
       redirect_to quests_path
+    else
+      render 'new'
     end
   end
 

@@ -7,6 +7,10 @@ class QuestPolicy < ApplicationPolicy
     user == record.user
   end
 
+  def destroy?
+    user == record.user
+  end
+
   class Scope < Scope
     def resolve
       if user

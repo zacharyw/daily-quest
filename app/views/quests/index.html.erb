@@ -20,8 +20,9 @@
 
 <% unless @quests.empty? %>
   <div class="row">
-    <table class="table">
-      <thead>
+    <div class="table-container">
+      <table class="table" id="quest-table">
+        <thead>
         <th>Description</th>
         <th>Goal</th>
         <th>Reward</th>
@@ -29,9 +30,9 @@
         <th>Longest Chain</th>
         <th>Total Completions</th>
         <th>Complete Today</th>
-      </thead>
-      <tbody>
-      <% @quests.each do |quest| %>
+        </thead>
+        <tbody>
+        <% @quests.each do |quest| %>
           <tr>
             <td>
               <%= link_to quest.description, edit_quest_path(quest.id) %>
@@ -51,9 +52,10 @@
               %>
             </td>
           </tr>
-      <% end %>
-      </tbody>
-    </table>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
   <div class="modal fade" id="rewardModal" tabindex="-1" role="dialog">
     <div class="modal-dialog">
